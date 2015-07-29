@@ -65,4 +65,7 @@ def related_actions(string):
     tts.say("What should I do now ?")
 
 while(True):
-    related_actions(get_string())
+	try:
+		related_actions(get_string())
+	except LookupError:
+		print "Unintelligible. Trying again."
