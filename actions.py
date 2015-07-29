@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from naoqi import ALProxy
 from audio import get_string
 import sys
