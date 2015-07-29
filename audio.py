@@ -3,4 +3,7 @@ def get_string():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         audio = r.listen(source)
-    return r.recognize(audio)
+    if audio.data:
+        return r.recognize(audio)
+    else:
+        return 0
