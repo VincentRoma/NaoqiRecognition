@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 def get_string():
     import speech_recognition as sr
     r = sr.Recognizer()
