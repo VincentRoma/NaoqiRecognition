@@ -14,6 +14,8 @@ if len(sys.argv) > 2:
 else:
     nao_port = 9559
 
+tts = ALProxy("ALTextToSpeech", nao_ip, nao_port)
+
 
 def walk_to_position(nao_ip, port, x, y, teta=0.0, freq=0):
     try:
@@ -30,7 +32,6 @@ def walk_to_position(nao_ip, port, x, y, teta=0.0, freq=0):
 
 
 def related_actions(string):
-    tts = ALProxy("ALTextToSpeech", nao_ip, nao_port)
     print 'Recognized: {}'.format(string)
     if 'stand' in '{}'.format(string):
         try:
@@ -52,8 +53,12 @@ def related_actions(string):
         if result:
             tts.say("Finally Sitting")
 
+    elif 'moonwalk' in '{}'.format(string):
+        walk_to_position(nao_ip, nao_port, -1.0, 0.0, 0.0, 1.0)
+
     elif 'walk' in '{}'.format(string):
-        walk_to_position(nao_ip, nao_port, 0.2, 0.3)
+        walk_to_position(nao_ip, nao_port, 1, 0, 0, 1)
+
 
     # else:
     #     from pygoogle import pygoogle
