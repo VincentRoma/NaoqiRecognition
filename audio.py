@@ -7,7 +7,9 @@ def get_string():
         audio = r.listen(source)
 
     if audio.data:
-        response = r.recognize(audio)        
+        response = r.recognize(audio)
+        import pdb; pdb.set_trace()
+        
         return response
     else:
         return 0
