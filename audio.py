@@ -5,7 +5,11 @@ def get_string():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         audio = r.listen(source)
+
     if audio.data:
-        return r.recognize(audio)
+        response = r.recognize(audio)
+        import pdb; pdb.set_trace()
+        
+        return response
     else:
         return 0
