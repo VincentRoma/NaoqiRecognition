@@ -8,7 +8,6 @@ def get_string():
 
     if audio.data:
         response = r.recognize(audio)
-        import pdb; pdb.set_trace()
         
         return response
     else:
