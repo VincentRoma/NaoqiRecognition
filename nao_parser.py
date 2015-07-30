@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 
-from naoqi import ALProxy
 import actions
-import env
 
-understandableWords = ["sit", "stand", "walk", "moonwalk"]
+understandableWords = ["sit", "stand", "walk", "moonwalk", "row"]
 helloWords = ["hello", "hi", "hey"]
 priorityWords = ["now"]
 actionsArray = []
@@ -31,8 +29,6 @@ def send_next():
 
 def parse(string):
     print 'Recognized: {}'.format(string)
-    tts = ALProxy("ALTextToSpeech", env.nao_ip, env.nao_port)
     cut_sentence(string)
     send_next()
-    tts.say("What should I do now ?")
     return None

@@ -15,7 +15,7 @@ def walk_to_position(x, y, theta=0.0, freq=0.0):
 
 
 def do_action(string):
-    tts = ALProxy("ALTextToSpeech", env.nao_ip, env.nao_port)
+    rowing = False
     postureProxy = None
     try:
         postureProxy = ALProxy("ALRobotPosture", env.nao_ip, env.nao_port)
@@ -38,7 +38,19 @@ def do_action(string):
         if postureProxy.getPosture() != "Stand":
             postureProxy.goToPosture("Stand", 1.0)
         walk_to_position(0.2, 0.3)
+    elif 'row' in '{}'.format(string):
+        if env.global_rowing == False:
+            env.global_rowing = True
+            rowing = True
+        else:
+            tts = ALProxy("ALTextToSpeech", env.nao_ip, env.nao_port)
+            volume = tts.getVolume()
+            tts.setVolume(1)
+            tts.say("Fight the Power")
+            tts.setVolume(volume)
 
+    if not rowing:
+        env.global_rowing = False
 
 
     # else:
