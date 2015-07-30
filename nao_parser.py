@@ -4,7 +4,7 @@ from naoqi import ALProxy
 import actions
 import env
 
-understandableWords = ["sit", "stand", "say"]
+understandableWords = ["sit", "stand", "walk", "moonwalk"]
 helloWords = ["hello", "hi", "hey"]
 priorityWords = ["now"]
 actionsArray = []
