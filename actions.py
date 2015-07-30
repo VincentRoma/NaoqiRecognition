@@ -32,8 +32,13 @@ def do_action(string):
         if result:
             tts.say("Finally Sitting")
 
+    elif 'moonwalk' in '{}'.format(string):
+        walk_to_position(env.nao_ip, env.nao_port, -1.0, 0.0, 0.0, 1.0)
+
     elif 'walk' in '{}'.format(string):
         walk_to_position(env.nao_ip, env.nao_port, 0.2, 0.3)
+
+
 
     # else:
     #     from pygoogle import pygoogle
