@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 from audio import get_string
+import nao_parser
 import sys
 import env
-import parser
 
 if len(sys.argv) > 1:
     env.nao_ip = sys.argv[1]
@@ -17,7 +17,7 @@ if len(sys.argv) > 2:
 while True:
     try:
         string = get_string()
-    except LookupError:
-        print "Unintelligible. Trying again."
+    except LookupError as e:
+        print e
     else:
-        parser.parse(string)
+        nao_parser.parse(string)

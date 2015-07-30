@@ -9,4 +9,4 @@ var/
 .installed.cfg
 *.egg
 .idea/*
-.pyc
+*.pyc

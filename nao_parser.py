@@ -12,6 +12,7 @@ actionsArray = []
 
 def cut_sentence(sentence):
     words = sentence.split(" ")
+    print(words)
     for word in words:
         if word in priorityWords:
             # get the last item and put it first
@@ -22,14 +23,16 @@ def cut_sentence(sentence):
 
 
 def send_next():
-    if actionsArray:
-        # TODO send the action.
-        actions.do_action(actionsArray.pop(0))
+    while actionsArray:
+        action = actionsArray.pop(0)
+        print action
+        actions.do_action(action)
 
 
 def parse(string):
     print 'Recognized: {}'.format(string)
     tts = ALProxy("ALTextToSpeech", env.nao_ip, env.nao_port)
     cut_sentence(string)
-    actions.do_action(send_next)
+    send_next()
     tts.say("What should I do now ?")
+    return None

@@ -1,2 +1,2 @@
 nao_ip = None
-nao_port = 9959
+nao_port = 9559
