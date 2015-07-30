@@ -23,20 +23,21 @@ def do_action(string):
         print "Could not create proxy to ALRobotPosture"
         print "Error was: ", e
     if 'stand' in '{}'.format(string) and postureProxy is not None:
-        result = postureProxy.goToPosture("Stand", 1.0)
-        if result:
-            tts.say('It feels good to stand')
+        postureProxy.goToPosture("Stand", 1.0)
 
     elif 'sit' in '{}'.format(string) and postureProxy is not None:
-        result = postureProxy.goToPosture("Sit", 1.0)
-        if result:
-            tts.say("Finally Sitting")
+        postureProxy.goToPosture("Sit", 1.0)
 
     elif 'moonwalk' in '{}'.format(string):
-        walk_to_position(env.nao_ip, env.nao_port, -1.0, 0.0, 0.0, 1.0)
+        if postureProxy.getPosture() != "Stand":
+            postureProxy.goToPosture("Stand", 1.0)
+
+        walk_to_position(-1.0, 0.0, 0.0, 1)
 
     elif 'walk' in '{}'.format(string):
-        walk_to_position(env.nao_ip, env.nao_port, 0.2, 0.3)
+        if postureProxy.getPosture() != "Stand":
+            postureProxy.goToPosture("Stand", 1.0)
+        walk_to_position(0.2, 0.3)
 
 
 
