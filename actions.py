@@ -39,7 +39,7 @@ def do_action(string):
             postureProxy.goToPosture("Stand", 1.0)
         walk_to_position(0.2, 0.3)
     elif 'row' in '{}'.format(string):
-        if env.global_rowing == False:
+        if not env.global_rowing:
             env.global_rowing = True
             rowing = True
         else:
