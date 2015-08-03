@@ -17,12 +17,18 @@ def walk_to_position(x, y, theta=0.0, freq=0.0):
 def do_action(string):
     rowing = False
     postureProxy = None
+    tts = ALProxy("ALTextToSpeech", env.nao_ip, env.nao_port)
     try:
         postureProxy = ALProxy("ALRobotPosture", env.nao_ip, env.nao_port)
     except Exception, e:
         print "Could not create proxy to ALRobotPosture"
         print "Error was: ", e
-    if 'stand' in '{}'.format(string) and postureProxy is not None:
+    if 'how are you' in '{}'.format(string):
+        tts.say("I'm fine, how are you ?")
+    elif 'thank you' in '{}'.format(string):
+        tts.say("You're welcome !")
+        add_positive()
+    elif 'stand' in '{}'.format(string) and postureProxy is not None:
         postureProxy.goToPosture("Stand", 1.0)
 
     elif 'sit' in '{}'.format(string) and postureProxy is not None:
@@ -43,7 +49,6 @@ def do_action(string):
             env.global_rowing = True
             rowing = True
         else:
-            tts = ALProxy("ALTextToSpeech", env.nao_ip, env.nao_port)
             volume = tts.getVolume()
             tts.setVolume(1)
             tts.say("Fight the Power")
@@ -60,3 +65,10 @@ def do_action(string):
     #     print '*Found %s results*' % (g.get_result_count())
     #     import pdb; pdb.set_trace()
     #     g.get_urls()
+
+
+def add_positive():
+    env.nao_state_positive += 0.01
+    if env.nao_state_positive > 1:
+        env.nao_state_positive = 1
+    print env.nao_state_positive
