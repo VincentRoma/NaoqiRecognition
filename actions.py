@@ -45,7 +45,7 @@ def do_action(string):
     elif 'record' in '{}'.format(string) or 'recall' in '{}'.format(string):
         print "yolo bitch!"
         audioProxy = ALProxy("ALAudioRecorder", env.nao_ip, env.nao_port)
-        audioProxy.startMicrophonesRecording("/home/nao/test.wav", "wav", 16000)
+        audioProxy.startMicrophonesRecording("/home/nao/test.wav", "wav", 16000, [1,1,1,1])
         time.sleep(15)
         audioProxy.stopMicrophonesRecording()
         print "done bitch!"
