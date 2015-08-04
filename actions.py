@@ -48,10 +48,16 @@ def do_action(string):
             tts.setVolume(1)
             tts.say("Fight the Power")
             tts.setVolume(volume)
+    elif 'face' in '{}'.format(string):
+        print "test1"
+        tts = ALProxy("ALFaceDetection", env.nao_ip, env.nao_port)
+        tts.enableTracking(True)
+        tts.learnFace("damien")
+        ALProxy("ALPhotoCaptureProxy", env.nao_ip, env.nao_port).takePicture()
+        print "test"
 
     if not rowing:
         env.global_rowing = False
-
 
     # else:
     #     from pygoogle import pygoogle

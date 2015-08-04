@@ -3,7 +3,7 @@
 import actions
 import env
 
-understandableWords = ["sit", "stand", "walk", "moonwalk", "row", "start", "stop"]
+understandableWords = ["sit", "stand", "walk", "moonwalk", "row", "start", "stop", "face"]
 helloWords = ["hello", "hi", "hey"]
 priorityWords = ["now"]
 startWords = ["start"]
