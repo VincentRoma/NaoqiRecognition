@@ -3,6 +3,7 @@
 from naoqi import ALProxy
 import env
 import time
+import knock_jokes
 
 
 def walk_to_position(x, y, theta=0.0, freq=0.0):
@@ -34,6 +35,21 @@ def do_action(string):
 
     elif 'sit' in '{}'.format(string) and postureProxy is not None:
         postureProxy.goToPosture("Sit", 1.0)
+
+    elif 'joke' in '{}'.format(string):
+        tts.say("Yay! I love jokes !")
+
+    elif 'knock' in '{}'.format(string):
+        tts.say("Who's there ?")
+        env.knocking = 1
+
+    elif 'knocked' in '{}'.format(string):
+        tts.say(knock_jokes.current_knock + " who ?")
+        env.knocking = 2
+
+    elif 'nao_laugh' in '{}'.format(string):
+        tts.say("Hahahahaha !")
+        env.knocking = 0
 
     elif 'face' in '{}'.format(string):
         print "test1"

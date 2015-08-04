@@ -6,8 +6,9 @@ import env
 import math
 import re
 import random
+import knock_jokes
 
-understandableWords = ["sit", "stand", "walk", "moonwalk", "row", "start", "stop", "face", "record","recall"]
+understandableWords = ["sit", "stand", "walk", "moonwalk", "row", "face", "record", "recall", "joke"]
 understandableSentences = [
     "how are you",
     "thank you",
@@ -82,6 +83,18 @@ def send_next():
 
 def parse(string):
     print 'Recognized: {}'.format(string)
-    cut_sentence(string)
+    if env.knocking == 1:
+        knock_jokes.current_knock = string
+        actionsArray.append("knocked")
+    if env.knocking == 2:
+        knock_jokes.add_knock_joke(
+            knock_jokes.current_knock,
+            string,
+        )
+        knock_jokes.current_knock = ""
+        actionsArray.append("nao_laugh")
+        print knock_jokes.jokes
+    else:
+        cut_sentence(string)
     send_next()
     return None
