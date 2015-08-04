@@ -7,7 +7,7 @@ import math
 import re
 import random
 
-understandableWords = ["sit", "stand", "walk", "moonwalk", "row", "start", "stop", "face"]
+understandableWords = ["sit", "stand", "walk", "moonwalk", "row", "start", "stop", "face", "record","recall"]
 understandableSentences = [
     "how are you",
     "thank you",
