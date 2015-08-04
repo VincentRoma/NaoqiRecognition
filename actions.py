@@ -48,6 +48,8 @@ def do_action(string):
             tts.setVolume(1)
             tts.say("Fight the Power")
             tts.setVolume(volume)
+    elif 'relax' in string:
+        postureProxy.goToPosture("SitRelax", 1.0)
 
     if not rowing:
         env.global_rowing = False

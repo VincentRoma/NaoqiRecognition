@@ -2,7 +2,7 @@
 
 import actions
 
-understandableWords = ["sit", "stand", "walk", "moonwalk", "row"]
+understandableWords = ["sit", "relax", "stand", "walk", "moonwalk", "row"]
 helloWords = ["hello", "hi", "hey"]
 priorityWords = ["now"]
 actionsArray = []
