@@ -25,7 +25,23 @@ def do_action(string):
     except Exception, e:
         print "Could not create proxy to ALRobotPosture"
         print "Error was: ", e
-    if 'how are you' in '{}'.format(string):
+    if env.joking_knock and not 'there' in '{}'.format(string):
+        tts.say("You were supposed to say : who's there !")
+    elif 'there' in '{}'.format(string):
+        tts.say(str(knock_jokes.jokes[0]['first']))
+        env.joking_knock_second = True
+        env.joking_knock = False
+    elif 'who' in '{}'.format(string) and env.joking_knock_second:
+        tts.say(str(knock_jokes.jokes[0]['second']))
+        env.joking = False
+        env.joking_knock = False
+        env.joking_knock_second = False
+        tts.say("Hah hah hah ! Hah hah hah ! Hah hah ! Hehe ! Weehee !")
+        if postureProxy.getPosture() != "Stand":
+            postureProxy.goToPosture("Stand", 1.0)
+
+        walk_to_position(-1.0, 0.0, 0.0, 1)
+    elif 'how are you' in '{}'.format(string):
         tts.say("I'm fine, how are you ?")
     elif 'thank you' in '{}'.format(string):
         tts.say("You're welcome !")
@@ -40,7 +56,6 @@ def do_action(string):
         tts.say("Yay! I love jokes !")
 
     elif 'knock knock' in '{}'.format(string):
-        print "test"
         tts.say("Who's there ?")
         env.knocking = 1
 
@@ -49,8 +64,9 @@ def do_action(string):
             tts.say(str(knock_jokes.current_knock + " who ?"))
             env.knocking = 2
     elif 'nao_laugh' in '{}'.format(string):
-        tts.say("Hahahahaha !")
+        tts.say("Hah hah hah hah hah !")
         env.knocking = 0
+        knock_jokes.joke_for_you = True
 
     elif 'face' in '{}'.format(string):
         tts = ALProxy("ALFaceDetection", env.nao_ip, env.nao_port)
@@ -74,7 +90,7 @@ def do_action(string):
             postureProxy.goToPosture("Stand", 1.0)
         walk_to_position(0.2, 0.3)
     elif 'row' in '{}'.format(string):
-        if env.global_rowing == False:
+        if not env.global_rowing:
             env.global_rowing = True
             rowing = True
         else:
@@ -82,6 +98,18 @@ def do_action(string):
             tts.setVolume(1)
             tts.say("Fight the Power")
             tts.setVolume(volume)
+    elif 'hello' in '{}'.format(string):
+        alas = ALProxy('ALAnimatedSpeech', env.nao_ip, env.nao_port)
+        alas.say("^startTag(hello) Hello !^stopTag(hello)")
+        if knock_jokes.joke_for_you:
+            tts.say("Hey, do you want to hear a joke ?")
+        env.joking = True
+    elif 'no' in '{}'.format(string) and env.joking:
+        tts.say("You're missing on something !")
+        env.joking = False
+    elif 'yes' in '{}'.format(string) and env.joking:
+        tts.say("Knock knock !")
+        env.joking_knock = True
 
     if not rowing:
         env.global_rowing = False

@@ -8,7 +8,7 @@ import re
 import random
 import knock_jokes
 
-understandableWords = ["sit", "stand", "walk", "moonwalk", "row", "face", "record", "recall", "joke"]
+understandableWords = ["sit", "stand", "walk", "moonwalk", "row", "face", "record", "recall", "joke", "yes", "no", "there", "who"]
 understandableSentences = [
     "how are you",
     "thank you",

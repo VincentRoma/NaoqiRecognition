@@ -5,3 +5,6 @@ nao_state_positive = 0.8
 nice_demand = False
 knocking = 0
 speaking = False
+joking = False
+joking_knock = False
+joking_knock_second = False
