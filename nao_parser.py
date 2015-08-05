@@ -12,11 +12,10 @@ understandableWords = ["sit", "stand", "walk", "moonwalk", "row", "face", "recor
 understandableSentences = [
     "how are you",
     "thank you",
+    "knock knock",
 ]
 helloWords = ["hello", "hi", "hey"]
 priorityWords = ["now"]
-startWords = ["start", "begin"]
-stopWords = ["stop"]
 pleaseWords = ["please"]
 pleasedAnswers = [
     "Sure !",
@@ -50,16 +49,10 @@ def cut_sentence(sentence):
     words = sentence.split(" ")
     print(words)
     for word in words:
-        if word in startWords:
-            env.nao_listening = True
-        elif word in stopWords:
-            env.nao_listening = False
-        elif word in pleaseWords:
+        if word in pleaseWords:
             actions.add_positive()
             env.nice_demand = True
 
-        if not env.nao_listening:
-            continue
         if word in priorityWords:
             # get the last item and put it first
             actionsArray.insert(0, actionsArray.pop())
@@ -85,6 +78,7 @@ def parse(string):
     print 'Recognized: {}'.format(string)
     if env.knocking == 1:
         knock_jokes.current_knock = string
+        print knock_jokes.current_knock
         actionsArray.append("knocked")
     if env.knocking == 2:
         knock_jokes.add_knock_joke(

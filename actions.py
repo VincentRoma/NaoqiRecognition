@@ -39,32 +39,29 @@ def do_action(string):
     elif 'joke' in '{}'.format(string):
         tts.say("Yay! I love jokes !")
 
-    elif 'knock' in '{}'.format(string):
+    elif 'knock knock' in '{}'.format(string):
+        print "test"
         tts.say("Who's there ?")
         env.knocking = 1
 
     elif 'knocked' in '{}'.format(string):
-        tts.say(knock_jokes.current_knock + " who ?")
-        env.knocking = 2
-
+        if env.knocking == 1:
+            tts.say(str(knock_jokes.current_knock + " who ?"))
+            env.knocking = 2
     elif 'nao_laugh' in '{}'.format(string):
         tts.say("Hahahahaha !")
         env.knocking = 0
 
     elif 'face' in '{}'.format(string):
-        print "test1"
         tts = ALProxy("ALFaceDetection", env.nao_ip, env.nao_port)
         tts.enableTracking(True)
         tts.learnFace("damien")
         ALProxy("ALPhotoCaptureProxy", env.nao_ip, env.nao_port).takePicture()
-        print "test"
     elif 'record' in '{}'.format(string) or 'recall' in '{}'.format(string):
-        print "yolo bitch!"
         audioProxy = ALProxy("ALAudioRecorder", env.nao_ip, env.nao_port)
-        audioProxy.startMicrophonesRecording("/home/nao/test.wav", "wav", 16000, [1,1,1,1])
+        audioProxy.startMicrophonesRecording("/home/nao/test.wav", "wav", 16000, [1, 1, 1, 1])
         time.sleep(15)
         audioProxy.stopMicrophonesRecording()
-        print "done bitch!"
 
     elif 'moonwalk' in '{}'.format(string):
         if postureProxy.getPosture() != "Stand":
@@ -85,8 +82,6 @@ def do_action(string):
             tts.setVolume(1)
             tts.say("Fight the Power")
             tts.setVolume(volume)
-
-
 
     if not rowing:
         env.global_rowing = False
